@@ -1,0 +1,7 @@
+{
+  "name": "RETO AI (Base Version)",
+  "description": "A comprehensive retailer management system for the electronics industry. Handles NLC (Net Landing Cost) sheets, purchase orders, inventory, and sales, utilizing Gemini AI for margin analysis and automated data extraction.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

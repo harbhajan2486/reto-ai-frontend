@@ -39,7 +39,7 @@ useEffect(() => {
   const testBackend = async () => {
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL || import.meta.env.NEXT_PUBLIC_API_BASE_URL}/health`
+        `${import.meta.env.VITE_API_BASE_URL || import.meta.env.NEXT_PUBLIC_API_BASE_URL}/`
       );
       const data = await res.json();
       console.log('Backend health:', data);

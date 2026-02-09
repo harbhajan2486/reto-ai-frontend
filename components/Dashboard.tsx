@@ -34,22 +34,7 @@ const Dashboard: React.FC<DashboardProps> = ({
   const [cityFilter, setCityFilter] = useState('ALL');
   const [areaFilter, setAreaFilter] = useState('ALL');
 
-import { useEffect } from 'react';
-useEffect(() => {
-  const testBackend = async () => {
-    try {
-      const res = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL || import.meta.env.NEXT_PUBLIC_API_BASE_URL}/`
-      );
-      const data = await res.json();
-      console.log('Backend health:', data);
-    } catch (err) {
-      console.error('Backend not reachable', err);
-    }
-  };
 
-  testBackend();
-}, []);
 
   
   // Recent Sales Table Filters
@@ -61,19 +46,28 @@ useEffect(() => {
   });
 
 useEffect(() => {
-  const apiBase = import.meta.env.VITE_API_BASE_URL;
+  const apiBase =
+    import.meta.env.VITE_API_BASE_URL ||
+    import.meta.env.NEXT_PUBLIC_API_BASE_URL ||
+    "";
+
+  if (!apiBase) {
+    console.error("❌ API base URL not defined");
+    return;
+  }
 
   console.log("API BASE URL:", apiBase);
 
   fetch(apiBase + "/")
     .then(res => res.text())
     .then(data => {
-      console.log("Backend response:", data);
+      console.log("✅ Backend response:", data);
     })
     .catch(err => {
-      console.error("Backend error:", err);
+      console.error("❌ Backend error:", err);
     });
 }, []);
+
 
   // --- Filtering Logic for Sales ---
   const filterSalesByDate = (saleList: Sale[]) => {

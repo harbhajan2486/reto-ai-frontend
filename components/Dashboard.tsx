@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NLCItem, Sale, InventoryItem, UserRole, RetailerProfile } from '../types';
 import { ComposedChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LineChart, BarChart } from 'recharts';
 import { IndianRupee, Package, TrendingUp, AlertCircle, Users, Building, Calendar } from 'lucide-react';
@@ -41,6 +41,21 @@ const Dashboard: React.FC<DashboardProps> = ({
       model: '',
       minGM: '',
   });
+
+useEffect(() => {
+  const apiBase = import.meta.env.VITE_API_BASE_URL;
+
+  console.log("API BASE URL:", apiBase);
+
+  fetch(apiBase + "/")
+    .then(res => res.text())
+    .then(data => {
+      console.log("Backend response:", data);
+    })
+    .catch(err => {
+      console.error("Backend error:", err);
+    });
+}, []);
 
   // --- Filtering Logic for Sales ---
   const filterSalesByDate = (saleList: Sale[]) => {

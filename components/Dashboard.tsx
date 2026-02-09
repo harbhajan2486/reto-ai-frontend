@@ -33,6 +33,24 @@ const Dashboard: React.FC<DashboardProps> = ({
   const [customRange, setCustomRange] = useState({ start: '', end: '' });
   const [cityFilter, setCityFilter] = useState('ALL');
   const [areaFilter, setAreaFilter] = useState('ALL');
+
+import { useEffect } from 'react';
+useEffect(() => {
+  const testBackend = async () => {
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL || import.meta.env.NEXT_PUBLIC_API_BASE_URL}/health`
+      );
+      const data = await res.json();
+      console.log('Backend health:', data);
+    } catch (err) {
+      console.error('Backend not reachable', err);
+    }
+  };
+
+  testBackend();
+}, []);
+
   
   // Recent Sales Table Filters
   const [salesFilters, setSalesFilters] = useState({
